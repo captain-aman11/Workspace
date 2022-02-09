@@ -3,9 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -19,11 +16,17 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
+    const user = {
+      name: data.get("firstName") + " " + data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    localStorage.setItem(data.get("email"), JSON.stringify(user));
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+    window.location("/");
   };
 
   return (
@@ -79,7 +82,7 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoCoomplete="email"
+                  autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12}>
