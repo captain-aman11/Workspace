@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
 import {
   Nav,
@@ -12,6 +12,26 @@ import {
 
 function HomePage() {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  const [cardData, setCardData] = useState([]);
+
+  // useEffect function
+  useEffect(async () => {
+    const url = "https://rickandmortyapi.com/api/character";
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const json = await response.json();
+        const jsonData = json.results;
+        setCardData(jsonData);
+        console.log(jsonData);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -45,37 +65,47 @@ function HomePage() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {cardData.map((c) => {
+        <h1>{c.id}</h1>;
+      })}
       <Container style={{ height: "100vh" }}>
-        <>
-          <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-            <Card style={{ width: "300px" }}>
-              <Card.Img
-                variant="top"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                height="300px"
-                width="300px"
-              />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>Front-View</Card.Text>
-                <Button variant="primary" onClick={handleClick}>
-                  View Details
-                </Button>
-              </Card.Body>
-            </Card>
+        {cardData.map((c) => {
+          <h1>It's rendering here</h1>;
+          // <ReactCardFlip
+          //   key={c.id}
+          //   isFlipped={isFlipped}
+          //   flipDirection="vertical"
+          // >
+          //   <Card style={{ width: "300px" }}>
+          //     <Card.Img
+          //       variant="top"
+          //       src={c.image}
+          //       height="300px"
+          //       width="300px"
+          //     />
+          //     <Card.Body>
+          //       <Card.Title>{c.name}</Card.Title>
+          //       <Card.Text>{c.species}</Card.Text>
+          //       <Button variant="primary" onClick={handleClick}>
+          //         View Details
+          //       </Button>
+          //     </Card.Body>
+          //   </Card>
 
-            <Card style={{ width: "300px" }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>Back-View</Card.Text>
-                <Button variant="primary" onClick={handleClick}>
-                  Go somewhere
-                </Button>
-              </Card.Body>
-            </Card>
-          </ReactCardFlip>
-        </>
+          //   <Card style={{ width: "300px", height: "300px" }}>
+          //     <Card.Body>
+          //       <Card.Title>Character Details</Card.Title>
+          //       <Card.Text>Name : {c.name}</Card.Text>
+          //       <Card.Text>Status : {c.status}</Card.Text>
+          //       <Card.Text>Gender : {c.gender}</Card.Text>
+          //       <Card.Text>Species : {c.species}</Card.Text>
+          //       <Button variant="primary" onClick={handleClick}>
+          //         View Image
+          //       </Button>
+          //     </Card.Body>
+          //   </Card>
+          // </ReactCardFlip>;
+        })}
       </Container>
     </>
   );
