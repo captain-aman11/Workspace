@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 function Header() {
+  const user = JSON.parse(sessionStorage.getItem("user"));
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -15,15 +16,29 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <NavLink style={styles.navLink} to="#">
-              Saved Cards
-            </NavLink>
-            <NavLink style={styles.navLink} to="/login">
-              Login
-            </NavLink>
-            <NavLink style={styles.navLink} to="/register">
-              Register
-            </NavLink>
+            {user && (
+              <>
+                <NavLink style={styles.navLink} to="#">
+                  Welcome, {user.name}
+                </NavLink>
+                <NavLink style={styles.navLink} to="#">
+                  Saved Cards
+                </NavLink>
+                <NavLink style={styles.navLink} to="/logout">
+                  Logout
+                </NavLink>
+              </>
+            )}
+            {!user && (
+              <>
+                <NavLink style={styles.navLink} to="/login">
+                  Login
+                </NavLink>
+                <NavLink style={styles.navLink} to="/register">
+                  Register
+                </NavLink>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

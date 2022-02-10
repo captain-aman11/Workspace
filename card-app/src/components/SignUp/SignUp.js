@@ -22,11 +22,8 @@ export default function SignUp() {
       password: data.get("password"),
     };
     localStorage.setItem(data.get("email"), JSON.stringify(user));
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    window.location("/");
+    alert("User Registered Successfully. Login Now.");
+    window.location = "/login";
   };
 
   return (

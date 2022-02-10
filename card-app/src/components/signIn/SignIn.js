@@ -30,7 +30,7 @@ export default function SignInSide() {
       const user = JSON.parse(localStorage.getItem(data.get("email")));
 
       if (data.get("password") === user.password) {
-        sessionStorage.setItem(data.get("email"), JSON.stringify(user));
+        sessionStorage.setItem("user", JSON.stringify(user));
       } else {
         alert("Invalid Password");
       }

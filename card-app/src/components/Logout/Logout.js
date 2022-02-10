@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Logout extends Component {
   componentDidMount() {
-    localStorage.removeItem(sessionStorage.getItem("email"));
+    sessionStorage.clear();
     window.location = "/";
   }
   render() {
