@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 function Header() {
@@ -21,9 +21,9 @@ function Header() {
                 <NavLink style={styles.navLink} to="#">
                   Welcome, {user.name}
                 </NavLink>
-                <NavLink style={styles.navLink} to="#">
+                {/* <NavLink style={styles.navLink} to="#">
                   Saved Cards
-                </NavLink>
+                </NavLink> */}
                 <NavLink style={styles.navLink} to="/logout">
                   Logout
                 </NavLink>

@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid";
 export default function HomePage() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardData, setCardData] = useState(null);
+  const [filteredData, setFilteredData] = useState(cardData);
+  const [search, setSearch] = useState("");
 
   // useEffect function
   useEffect(() => {
@@ -29,45 +31,73 @@ export default function HomePage() {
     setIsFlipped(!isFlipped);
   };
 
+  const handleSave = (card) => {
+    let characters = [];
+    let prevChars = JSON.parse(localStorage.getItem("characters"));
+    if (prevChars) characters = prevChars;
+    characters[characters.length] = card;
+    localStorage.setItem("characters", JSON.stringify(characters));
+    console.log(localStorage.getItem("characters"));
+  };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <>
+      <Grid item xs={12} sx={{ my: 4 }}>
+        <input placeholder="Search" onChange={handleSearch} />
+      </Grid>
       <Grid container spacing={2}>
         {cardData &&
-          cardData.map((c) => {
-            return (
-              <Grid item key={c.id}>
-                <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-                  <Card>
-                    <Card.Img
-                      variant="top"
-                      src={c.image}
-                      height="300px"
-                      width="300px"
-                    />
-                    <Card.Body>
-                      <Card.Title>{c.name}</Card.Title>
-                      <Card.Text>{c.species}</Card.Text>
-                      <Button variant="primary" onClick={handleClick}>
-                        View Details
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                  <Card style={{ width: "300px", height: "300px" }}>
-                    <Card.Body>
-                      <Card.Title>Character Details</Card.Title>
-                      <Card.Text>Name : {c.name}</Card.Text>
-                      <Card.Text>Status : {c.status}</Card.Text>
-                      <Card.Text>Gender : {c.gender}</Card.Text>
-                      <Card.Text>Species : {c.species}</Card.Text>
-                      <Button variant="primary" onClick={handleClick}>
-                        View Image
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </ReactCardFlip>
-              </Grid>
-            );
-          })}
+          cardData
+            .filter((c) => {
+              return c.name.toLowerCase().includes(search.toLowerCase());
+            })
+            .map((c) => {
+              return (
+                <Grid item key={c.id}>
+                  <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+                    <Card>
+                      <Card.Img
+                        variant="top"
+                        src={c.image}
+                        height="300px"
+                        width="300px"
+                      />
+                      <Card.Body>
+                        <Card.Title>{c.name}</Card.Title>
+                        <Card.Text>{c.species}</Card.Text>
+                        <Button
+                          style={{ marginRight: "4px" }}
+                          variant="success"
+                          onClick={() => handleSave(c)}
+                        >
+                          Save
+                        </Button>
+                        <Button variant="primary" onClick={handleClick}>
+                          View Details
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                    <Card style={{ width: "300px", height: "300px" }}>
+                      <Card.Body>
+                        <Card.Title>Character Details</Card.Title>
+                        <Card.Text>Name : {c.name}</Card.Text>
+                        <Card.Text>Status : {c.status}</Card.Text>
+                        <Card.Text>Gender : {c.gender}</Card.Text>
+                        <Card.Text>Species : {c.species}</Card.Text>
+
+                        <Button variant="primary" onClick={handleClick}>
+                          View Image
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </ReactCardFlip>
+                </Grid>
+              );
+            })}
       </Grid>
     </>
   );

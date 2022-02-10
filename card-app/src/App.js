@@ -6,6 +6,7 @@ import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import Header from "./components/Header/Header";
 function App() {
+  const user = sessionStorage.getItem("user");
   return (
     <>
       <Header />
