@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 
-function Navbar() {
+function Header() {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -23,4 +23,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Header;

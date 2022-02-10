@@ -4,11 +4,11 @@ import HomePage from "./components/HomePage/HomePage";
 import Logout from "./components/Logout/Logout";
 import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
-
+import Header from "./components/Header/Header";
 function App() {
   return (
     <>
-      <Navbar />
+      <Header />
       <main className="container">
         <Switch>
           <Route path="/register" component={SignUp} />

@@ -25,13 +25,17 @@ export default function HomePage() {
     fetchData();
   }, []);
 
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
+
   return (
     <>
       <Grid container spacing={2}>
         {cardData &&
           cardData.map((c) => {
             return (
-              <Grid item key={c.id} sx={{ ml: 1 }}>
+              <Grid item key={c.id}>
                 <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
                   <Card>
                     <Card.Img
