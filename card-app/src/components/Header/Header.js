@@ -1,11 +1,13 @@
 import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
-
+import { NavLink } from "react-router-dom";
 function Header() {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">Cards-App</Navbar.Brand>
+        <NavLink to="/" style={styles.navLink}>
+          <Navbar.Brand>Cards-App</Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -13,14 +15,28 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#">Saved Cards</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
+            <NavLink style={styles.navLink} to="#">
+              Saved Cards
+            </NavLink>
+            <NavLink style={styles.navLink} to="/login">
+              Login
+            </NavLink>
+            <NavLink style={styles.navLink} to="/register">
+              Register
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
+
+const styles = {
+  navLink: {
+    color: "black",
+    textDecoration: "none",
+    margin: "0 8px",
+  },
+};
 
 export default Header;
