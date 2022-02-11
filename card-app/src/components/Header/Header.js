@@ -21,9 +21,9 @@ function Header() {
                 <NavLink style={styles.navLink} to="#">
                   Welcome, {user.name}
                 </NavLink>
-                {/* <NavLink style={styles.navLink} to="#">
+                <NavLink style={styles.navLink} to="/savedcards">
                   Saved Cards
-                </NavLink> */}
+                </NavLink>
                 <NavLink style={styles.navLink} to="/logout">
                   Logout
                 </NavLink>

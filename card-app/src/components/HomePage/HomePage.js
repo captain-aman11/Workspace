@@ -34,9 +34,13 @@ export default function HomePage() {
     let characters = [];
     let prevChars = JSON.parse(localStorage.getItem("characters"));
 
-    console.log("prevChar : " + prevChars);
-    if (prevChars) characters = prevChars;
-
+    //If a Character is already Saved.
+    if (prevChars) {
+      const isAlreadyPresent = prevChars.find((c) => c.id === card.id);
+      if (isAlreadyPresent) {
+        return alert("Character Already Saved.");
+      } else characters = prevChars;
+    }
     characters.push(card);
     localStorage.setItem("characters", JSON.stringify(characters));
   };

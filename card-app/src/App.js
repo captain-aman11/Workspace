@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import Logout from "./components/Logout/Logout";
-import SignIn from "./components/signIn/SignIn";
+import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import Header from "./components/Header/Header";
+import SavedCards from "./components/SavedCards/SavedCards";
 function App() {
-  const user = sessionStorage.getItem("user");
   return (
     <>
       <Header />
@@ -15,6 +15,7 @@ function App() {
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={SignIn} />
           <Route path="/logout" component={Logout} />
+          <Route path="/savedcards" component={SavedCards} />
           <Route path="/" component={HomePage} />
         </Switch>
       </main>
