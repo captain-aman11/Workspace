@@ -24,7 +24,7 @@ function SavedCards() {
   return (
     <>
       <Grid container spacing={2}>
-        {(!cardData || cardData.length == 0) && (
+        {(!cardData || cardData.length === 0) && (
           <Typography variant="h1" sx={{ my: 6, mx: 2 }}>
             No Saved Cards.
           </Typography>
