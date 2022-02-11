@@ -54,7 +54,7 @@ export default function HomePage() {
       <Grid item xs={12} sx={{ my: 4 }}>
         <input placeholder="Search" onChange={handleSearch} />
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container xs={12} spacing={2}>
         {cardData &&
           cardData
             .filter((c) => {
@@ -63,7 +63,10 @@ export default function HomePage() {
             .map((c) => {
               return (
                 <Grid item key={c.id}>
-                  <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+                  <ReactCardFlip
+                    isFlipped={isFlipped}
+                    flipDirection="verrtical"
+                  >
                     <Card>
                       <Card.Img
                         variant="top"

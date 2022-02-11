@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import Logout from "./components/Logout/Logout";
@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="container">
+      <div style={styles.container}>
         <Switch>
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={SignIn} />
@@ -18,9 +18,15 @@ function App() {
           <Route path="/savedcards" component={SavedCards} />
           <Route path="/" component={HomePage} />
         </Switch>
-      </main>
+      </div>
     </>
   );
 }
+
+const styles = {
+  container: {
+    padding: "1rem",
+  },
+};
 
 export default App;
